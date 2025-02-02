@@ -1,0 +1,16 @@
+services:
+  bun:
+    build: bun-hello
+  node:
+    build: node-hello
+  oha:
+    build: oha
+    depends_on:
+      - bun
+      - node
+    entrypoint: /benchmark/run.sh
+    links:
+      - bun
+      - node
+    volumes:
+      - ./benchmark:/benchmark:ro

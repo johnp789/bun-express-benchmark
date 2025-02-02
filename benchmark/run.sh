@@ -1,10 +1,16 @@
 #!/usr/bin/env bash
 
 DURATION=10s
+OHA_COMMAND="oha -z $DURATION -w --latency-correction --disable-color --disable-keepalive --no-tui --json"
 
-for n in 1 2 10 50 100 200 ; do
+# Make really sure the targets are ready.
+sleep 2
+
+for n in 1 2 5 10 20 50 100 200 ; do
   echo "======== Bun, N_CONNECTIONS=$n ========"
-  oha -z $DURATION -c $n -w --latency-correction --disable-keepalive --no-tui http://bun:8080/
+  $OHA_COMMAND -c $n http://bun:8080/
   echo "======== Node, N_CONNECTIONS=$n ========"
-  oha -z $DURATION -c $n -w --latency-correction --disable-keepalive --no-tui http://node:8081/
+  $OHA_COMMAND -c $n http://node:8081/
 done
+
+echo "======== Done ========"

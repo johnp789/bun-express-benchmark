@@ -26,4 +26,4 @@ COPY --from=prerelease /usr/src/app/package.json .
 # run the app
 USER node
 EXPOSE 8081/tcp
-ENTRYPOINT [ "npm", "run", "serve" ]
+ENTRYPOINT [ "node", "index.mjs" ]

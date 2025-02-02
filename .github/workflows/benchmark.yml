@@ -10,6 +10,7 @@ jobs:
       matrix:
         include:
           - label: ubuntu-24.04
+          - label: ubuntu-24.04-arm
     steps:
       - uses: actions/checkout@v4
       - name: Clone oha
@@ -17,4 +18,4 @@ jobs:
         run: git clone --depth 1 --branch v1.6.0 https://github.com/hatoo/oha.git
       - name: Run Benchmark
         shell: bash
-        run: docker-compose up --abort-on-container-exit --exit-code-from oha
+        run: docker compose up --abort-on-container-exit --exit-code-from oha

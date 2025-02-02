@@ -9,3 +9,14 @@ Then, run the benchmark.
 ```shell
 docker-compose up --abort-on-container-exit --exit-code-from oha
 ```
+
+When it is done, collect the logs.
+```shell
+docker-compose logs --no-color > run-log
+docker-compose down
+```
+
+Sometimes, I would see a large number of these errors, and only when oha was testing requests to Node.
+```
+Cannot assign requested address (os error 99)
+```

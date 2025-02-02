@@ -1,0 +1,20 @@
+name: Benchmark
+
+on: workflow_dispatch
+
+jobs:
+  benchmark:
+    name: Benchmark
+    runs-on: ${{ matrix.label}}
+    strategy:
+      matrix:
+        include:
+          - label: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Clone oha
+        shell: bash
+        run: git clone --depth 1 --branch v1.6.0 https://github.com/hatoo/oha.git
+      - name: Run Benchmark
+        shell: bash
+        run: docker-compose up --abort-on-container-exit --exit-code-from oha
